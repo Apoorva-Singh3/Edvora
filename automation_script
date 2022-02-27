@@ -20,7 +20,7 @@ class EdvoraWebappTest(unittest.TestCase):
         username = "admin6"
         password = "12345"
 
-        driver = webdriver.Chrome(executable_path="C:/Users/a/apoorva/basicPythonAutomation/drivers/chromedriver.exe")
+        driver = webdriver.Chrome(executable_path="chromedriver.exe")
 
         driver.implicitly_wait(10)
         driver.maximize_window()
@@ -47,7 +47,7 @@ class EdvoraWebappTest(unittest.TestCase):
         logout_xpath = "//*[text() = 'Logout']"
         username = "admin5"
         password = "12345"
-        driver = webdriver.Chrome(executable_path="C:/Users/a/apoorva/basicPythonAutomation/drivers/chromedriver.exe")
+        driver = webdriver.Chrome(executable_path="chromedriver.exe")
 
         driver.implicitly_wait(10)
         driver.maximize_window()
@@ -84,7 +84,7 @@ class EdvoraWebappTest(unittest.TestCase):
         password = "12345"
         logout_xpath = "//*[text() = 'Logout']"
 
-        driver = webdriver.Chrome(executable_path="C:/Users/a/apoorva/basicPythonAutomation/drivers/chromedriver.exe")
+        driver = webdriver.Chrome(executable_path="chromedriver.exe")
 
         driver.implicitly_wait(10)
         driver.maximize_window()
