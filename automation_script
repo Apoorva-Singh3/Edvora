@@ -1,0 +1,139 @@
+import unittest
+from datetime import date
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+  
+class EdvoraWebappTest(unittest.TestCase):
+  
+    # Returns True or False. 
+    def test_scenario_1(self):
+        print('User Should register')
+        url = "https://testing-assessment-foh15kew9-edvora.vercel.app/"
+        reg_xpath = '//*[contains(@class,"chakra-button css-d509a4")]'
+        user_xpath = '//*[contains(@class, "chakra-input css-y572l6")]'
+        pass_xpath = '//*[contains(@autocomplete, "current-password")]'
+        create_xpath = '//*[contains(@class,"chakra-button css-8h0nsd")]'
+        username = "admin6"
+        password = "12345"
+
+        driver = webdriver.Chrome(executable_path="C:/Users/a/apoorva/basicPythonAutomation/drivers/chromedriver.exe")
+
+        driver.implicitly_wait(10)
+        driver.maximize_window()
+        driver.get(url)
+        print('Clicking on sign in')
+        driver.find_element(By.XPATH, reg_xpath).click()
+        time.sleep(2)
+        print('Enter credentials')
+        driver.find_element(By.XPATH, user_xpath).send_keys(username)
+        driver.find_element(By.XPATH, pass_xpath).send_keys(password)
+        driver.find_element(By.XPATH, create_xpath).click()
+        time.sleep(2)
+        print('Account created/register successfully, Exiting')
+        driver.quit()
+        self.assertTrue(True)
+
+
+    def test_scenario_2(self):
+        print("User should login")
+        url = "https://testing-assessment-foh15kew9-edvora.vercel.app/"
+        user_xpath = '//*[contains(@class, "chakra-input css-y572l6")]'
+        pass_xpath = '//*[contains(@autocomplete, "current-password")]'
+        create_xpath = '//*[contains(@class,"chakra-button css-8h0nsd")]'
+        logout_xpath = "//*[text() = 'Logout']"
+        username = "admin5"
+        password = "12345"
+        driver = webdriver.Chrome(executable_path="C:/Users/a/apoorva/basicPythonAutomation/drivers/chromedriver.exe")
+
+        driver.implicitly_wait(10)
+        driver.maximize_window()
+        driver.get(url)
+
+        print('Enter credentials')
+        driver.find_element(By.XPATH, user_xpath).send_keys(username)
+        driver.find_element(By.XPATH, pass_xpath).send_keys(password)
+        print('Clicking on login')
+        driver.find_element(By.XPATH, create_xpath).click()
+        time.sleep(5)
+        print('Account successfully logged in')            
+        driver.find_element(By.XPATH, logout_xpath).click()
+        time.sleep(5)
+
+        driver.quit()
+        self.assertTrue(True)
+
+    def test_scenario_3(self):
+        url = "https://testing-assessment-foh15kew9-edvora.vercel.app/"
+        user_xpath = '//*[contains(@class, "chakra-input css-y572l6")]'
+        pass_xpath = '//*[contains(@autocomplete, "current-password")]'
+        create_xpath = '//*[contains(@class,"chakra-button css-8h0nsd")]'
+        edit_xpath = "//*[text() = 'Edit']"
+        name_xpath = '//*[contains(@name, "fullname")]'
+        name = "Rama"
+        birth = "1972-03-03"
+        gender_xpath = '//select[@class="chakra-select css-ibs81u"]'
+        add_xpath = '//*[contains(@name, "address")]'
+        address = "Guwahati, Assam"
+        mob_no_xpath = '//*[contains(@name, "mobileNumber")]'
+        mob_no = "0123456789"
+        username = "admin"
+        password = "12345"
+        logout_xpath = "//*[text() = 'Logout']"
+
+        driver = webdriver.Chrome(executable_path="C:/Users/a/apoorva/basicPythonAutomation/drivers/chromedriver.exe")
+
+        driver.implicitly_wait(10)
+        driver.maximize_window()
+        driver.get(url)
+        print('Enter credentials')
+        driver.find_element(By.XPATH, user_xpath).send_keys(username)
+        driver.find_element(By.XPATH, pass_xpath).send_keys(password)
+        print('Clicking on login')
+        driver.find_element(By.XPATH, create_xpath).click()
+        time.sleep(5)
+        print('Clicking on edit')
+        driver.find_element(By.XPATH, edit_xpath).click()
+        time.sleep(2)
+        print('Changing the information')
+        #name
+        name_f = driver.find_element(By.XPATH, name_xpath)
+        name_f.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)
+        name_f.send_keys(name)
+
+        # date
+        find_date_js = f'var element = document.querySelector("#__next > div > main > div > div:nth-child(1) > div.css-1oc6xki > div > div.css-63qkuz > div.css-zlv539 > div:nth-child(1) > div > input");element.value = "{birth}"'
+        driver.execute_script(find_date_js)
+        time.sleep(2)
+
+        # gender select
+        gender_select = Select(driver.find_element(By.XPATH, gender_xpath))
+        gender_select.select_by_visible_text('female')
+        # action = ActionChains(driver)
+        time.sleep(2)
+
+
+        #adderess
+        time.sleep(2)
+        add_f = driver.find_element(By.XPATH, add_xpath)
+        add_f.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)
+        add_f.send_keys(address)
+
+        # mobile
+        time.sleep(2)
+        mob_f = driver.find_element(By.XPATH, mob_no_xpath)
+        mob_f.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)
+        mob_f.send_keys(mob_no)
+        time.sleep(2)
+        print('Details changed successfully')
+        driver.find_element(By.XPATH, logout_xpath).click()
+        time.sleep(5)
+
+        driver.quit()
+        self.assertTrue(True)
+  
+if __name__ == '__main__':
+    unittest.main()
